@@ -3,1104 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuickLoan India - Instant Personal & Business Loans</title>
+    <title>QuickLoan India | Professional Fintech Simulation</title>
     <style>
         :root {
             --primary: #0d6efd;
-            --primary-dark: #004494;
-            --secondary: #00d2d3;
-            --accent: #ff9f43;
-            --light: #f4f7f6;
-            --dark: #2c3e50;
-            --white: #ffffff;
-            --success: #28a745;
+            --success: #198754;
+            --warning: #ffc107;
             --danger: #dc3545;
-            --gray: #6c757d;
-            --font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --dark: #212529;
+            --light: #f8f9fa;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: var(--font);
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--dark);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* Navbar */
-        .navbar {
-            background-color: var(--white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            transition: color 0.3s ease;
-            cursor: pointer;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .btn {
-            padding: 0.6rem 1.2rem;
-            border-radius: 6px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary { background-color: var(--primary); color: var(--white); }
-        .btn-primary:hover { background-color: var(--primary-dark); }
-        .btn-outline { border: 1.5px solid var(--primary); color: var(--primary); background: transparent; }
-        .btn-outline:hover { background-color: var(--primary); color: var(--white); }
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; margin: 0; padding: 0; }
+        .nav { background: #fff; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
+        .card { background: #fff; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 1.5rem; }
+        .btn { padding: 0.8rem 1.5rem; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; }
+        .btn-primary { background: var(--primary); color: #fff; }
+        .badge { padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+        .disclaimer { font-size: 0.75rem; color: #666; text-align: center; margin-top: 2rem; padding: 1rem; background: #eee; }
         
-        /* Main Content Container */
-        main {
-            flex: 1;
-            padding: 2rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        /* Sections */
-        .section {
-            display: none;
-        }
-
-        .section.active {
-            display: block;
-            animation: fadeIn 0.4s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Hero Section */
-        .hero {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            align-items: center;
-            margin: 2rem 0;
-            background: linear-gradient(135deg, rgba(13,110,253,0.05) 0%, rgba(0,210,211,0.05) 100%);
-            padding: 3rem;
-            border-radius: 16px;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            color: var(--gray);
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .stat-box {
-            background: var(--white);
-            padding: 1rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            text-align: center;
-            min-width: 120px;
-        }
-
-        .stat-box h4 { color: var(--primary); font-size: 1.2rem; }
-        .stat-box span { font-size: 0.85rem; color: var(--gray); }
-
-        /* Forms Grid */
-        .form-container {
-            max-width: 500px;
-            margin: 2rem auto;
-            background: var(--white);
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        .form-container h2 {
-            margin-bottom: 1.5rem;
-            text-align: center;
-            color: var(--dark);
-        }
-
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.4rem;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 0.95rem;
-        }
-
-        .form-group input:focus, .form-group select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
-        }
-
-        /* Dashboard Layout */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 260px 1fr;
-            gap: 2rem;
-            margin-top: 1.5rem;
-        }
-
-        .dash-sidebar {
-            background: var(--white);
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            height: fit-content;
-        }
-
-        .dash-sidebar ul { list-style: none; }
-        .dash-sidebar li {
-            padding: 0.8rem 1rem;
-            margin-bottom: 0.4rem;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .dash-sidebar li:hover, .dash-sidebar li.active {
-            background: rgba(13,110,253,0.1);
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        .dash-content {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-
-        .dash-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .dash-card {
-            background: var(--light);
-            padding: 1.5rem;
-            border-radius: 8px;
-            border-left: 4px solid var(--primary);
-        }
-
-        .dash-card h3 { font-size: 0.9rem; color: var(--gray); margin-bottom: 0.4rem; }
-        .dash-card p { font-size: 1.6rem; font-weight: 700; color: var(--dark); }
-
-        /* Tables & Lists */
-        .table-responsive {
-            overflow-x: auto;
-            margin-top: 1.5rem;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            font-size: 0.95rem;
-        }
-
-        th, td {
-            padding: 0.9rem 1rem;
-            border-bottom: 1px solid #eee;
-        }
-
-        th { background: #f8f9fa; font-weight: 600; color: var(--dark); }
-        tr:hover { background-color: rgba(0,0,0,0.01); }
-
-        .badge {
-            padding: 0.3rem 0.6rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        .badge-warning { background: #fff3cd; color: #856404; }
-        .badge-success { background: #d4edda; color: #155724; }
-        .badge-danger { background: #f8d7da; color: #721c24; }
-
-        /* EMI Calculator Section */
-        .calculator-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            background: var(--white);
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            margin: 2rem 0;
-        }
-
-        .calculator-result {
-            background: var(--light);
-            padding: 1.5rem;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .calc-value {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin: 0.8rem 0;
-        }
-
-        /* Utility grid */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: var(--white);
-            padding: 2.5rem 5%;
-            margin-top: auto;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-col h4 {
-            margin-bottom: 1rem;
-            color: var(--secondary);
-        }
-
-        .footer-col ul {
-            list-style: none;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-col a {
-            color: #d1d8e0;
-            text-decoration: none;
-        }
-
-        .footer-col a:hover {
-            color: var(--secondary);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.85rem;
-            color: #888;
-        }
-
-        /* Document Preview Grid */
-        .file-preview {
-            display: flex;
-            gap: 1rem;
-            margin-top: 0.5rem;
-            font-size: 0.85rem;
-        }
-
-        /* Extra Pages Styles */
-        .grid-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .card {
-            background: var(--white);
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-
-        .faq-item {
-            background: var(--white);
-            margin-bottom: 0.8rem;
-            border-radius: 6px;
-            padding: 1rem;
-            cursor: pointer;
-        }
-
-        .faq-item h4 {
-            color: var(--dark);
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .faq-item p {
-            font-size: 0.9rem;
-            color: var(--gray);
-            margin-top: 0.5rem;
-            display: none;
-        }
-
-        .faq-item.active p {
-            display: block;
-        }
-
-        /* Mobile specific bottom navigation */
-        @media (max-width: 768px) {
-            .navbar { padding: 1rem; }
-            .nav-links { display: none; /* In full version consider adding a hamburger menu or responsive bottom bar */ }
-            .hero { grid-template-columns: 1fr; text-align: center; padding: 1.5rem; }
-            .hero-stats { justify-content: center; }
-            .calculator-container { grid-template-columns: 1fr; }
-            .dashboard-grid { grid-template-columns: 1fr; }
-        }
+        /* Dashboard specific */
+        .timeline { display: flex; justify-content: space-between; margin: 2rem 0; padding: 0; }
+        .step { color: #ccc; }
+        .step.active { color: var(--primary); font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="logo" onclick="navigateTo('home-section')">
-            <span>₹</span> QuickLoan India
-        </div>
-        <ul class="nav-links">
-            <li><a onclick="navigateTo('home-section')">Home</a></li>
-            <li><a onclick="navigateTo('calculator-section')">EMI Calculator</a></li>
-            <li><a onclick="navigateTo('about-section')">About</a></li>
-            <li><a onclick="navigateTo('faq-section')">FAQ</a></li>
-            <li><a onclick="navigateTo('contact-section')">Contact</a></li>
-        </ul>
-        <div id="auth-nav-buttons">
-            <button class="btn btn-outline" onclick="navigateTo('login-section')">Login</button>
-            <button class="btn btn-primary" onclick="navigateTo('register-section')">Apply Now</button>
-        </div>
-    </nav>
+<div class="nav">
+    <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">QuickLoan India</div>
+    <div>
+        <button class="btn" onclick="showSection('home')">Home</button>
+        <button class="btn" onclick="showSection('dashboard')">Dashboard</button>
+        <button class="btn" onclick="showSection('admin')">Admin</button>
+    </div>
+</div>
 
-    <main>
-        <section id="home-section" class="section active">
-            <div class="hero">
-                <div>
-                    <h1>Get Instant Personal & Business Loans up to ₹5 Lakhs</h1>
-                    <p>Low interest rates, zero hidden charges, and quick approval process. Get funds in your bank account in 24 hours.</p>
-                    <div style="display: flex; gap: 1rem;">
-                        <button class="btn btn-primary" onclick="navigateTo('register-section')">Apply For Loan</button>
-                        <button class="btn btn-outline" onclick="navigateTo('calculator-section')">Calculate EMI</button>
-                    </div>
-                    <div class="hero-stats">
-                        <div class="stat-box">
-                            <h4>4.8</h4>
-                            <span>Rating</span>
-                        </div>
-                        <div class="stat-box">
-                            <h4>1 Lakh+</h4>
-                            <span>Customers</span>
-                        </div>
-                        <div class="stat-box">
-                            <h4>24h</h4>
-                            <span>Disbursal</span>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <img src="https://images.unsplash.com/photo-1556742049-0cf94f6f4f5e?auto=format&fit=crop&w=500&q=80" alt="Financial Solutions" style="width: 100%; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
-                </div>
-            </div>
-        </section>
-
-        <section id="register-section" class="section">
-            <div class="form-container">
-                <h2>Create Account</h2>
-                <form id="register-form" onsubmit="handleRegister(event)">
-                    <div class="form-group">
-                        <label>Full Name</label>
-                        <input type="text" id="reg-name" required placeholder="John Doe">
-                    </div>
-                    <div class="form-group">
-                        <label>Email Address</label>
-                        <input type="email" id="reg-email" required placeholder="john@example.com">
-                    </div>
-                    <div class="form-group">
-                        <label>Mobile Number</label>
-                        <input type="tel" id="reg-mobile" required placeholder="9876543210" pattern="[0-9]{10}">
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" id="reg-password" required minlength="6" placeholder="••••••••">
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Register</button>
-                </form>
-                <p style="margin-top: 1rem; text-align: center; font-size: 0.9rem;">Already have an account? <a style="color:var(--primary); cursor:pointer;" onclick="navigateTo('login-section')">Login here</a></p>
-            </div>
-        </section>
-
-        <section id="login-section" class="section">
-            <div class="form-container">
-                <h2>Sign In</h2>
-                <form id="login-form" onsubmit="handleLogin(event)">
-                    <div class="form-group">
-                        <label>Email Address</label>
-                        <input type="email" id="login-email" required placeholder="john@example.com">
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" id="login-password" required placeholder="••••••••">
-                    </div>
-                    <div class="form-group" style="display: flex; justify-content: space-between; font-size: 0.85rem;">
-                        <label><input type="checkbox" id="is-admin-login"> Login as Admin</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Sign In</button>
-                </form>
-                <p style="margin-top: 1rem; text-align: center; font-size: 0.9rem;">Need an account? <a style="color:var(--primary); cursor:pointer;" onclick="navigateTo('register-section')">Register</a></p>
-            </div>
-        </section>
-
-        <section id="dashboard-section" class="section">
-            <h2>User Dashboard</h2>
-            <div class="dashboard-grid">
-                <div class="dash-sidebar">
-                    <ul>
-                        <li class="active" onclick="switchDashboardTab('dash-home')">Dashboard Home</li>
-                        <li onclick="switchDashboardTab('dash-apply')">Apply for Loan</li>
-                        <li onclick="handleLogout()">Logout</li>
-                    </ul>
-                </div>
-                
-                <div class="dash-content">
-                    <div id="dash-home" class="dash-tab-content">
-                        <h3>Welcome back, <span id="dash-user-name">User</span>!</h3>
-                        <p style="color: var(--gray);">Your loan profile details and status are updated below.</p>
-                        
-                        <div class="dash-cards" style="margin-top: 1.5rem;">
-                            <div class="dash-card">
-                                <h3>Loan Status</h3>
-                                <p id="dash-loan-status">-</p>
-                            </div>
-                            <div class="dash-card">
-                                <h3>Applied Amount</h3>
-                                <p id="dash-loan-amount">₹ 0</p>
-                            </div>
-                            <div class="dash-card">
-                                <h3>EMI Calculator</h3>
-                                <p style="font-size: 1.1rem; padding-top: 0.4rem;">₹ <span id="dash-emi-count">0</span> / month</p>
-                            </div>
-                        </div>
-
-                        <h4>Recent Applications</h4>
-                        <div class="table-responsive">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Application ID</th>
-                                        <th>Loan Type</th>
-                                        <th>Amount</th>
-                                        <th>Status</th>
-                                        <th>Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="dash-application-history">
-                                    <tr><td colspan="5">No application found. Start by applying for a loan.</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div id="dash-apply" class="dash-tab-content" style="display: none;">
-                        <h3>Apply for a Loan</h3>
-                        <form id="loan-form" onsubmit="handleLoanApplication(event)" style="margin-top: 1rem;">
-                            <div class="grid-2">
-                                <div class="form-group">
-                                    <label>Full Name</label>
-                                    <input type="text" id="loan-name" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Mobile Number</label>
-                                    <input type="tel" id="loan-mobile" required pattern="[0-9]{10}">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Residential Address</label>
-                                <textarea id="loan-address" rows="2" required></textarea>
-                            </div>
-                            <div class="grid-2">
-                                <div class="form-group">
-                                    <label>Loan Amount (₹)</label>
-                                    <input type="number" id="loan-amount" required max="500000" min="10000">
-                                </div>
-                                <div class="form-group">
-                                    <label>Loan Type</label>
-                                    <select id="loan-type" required>
-                                        <option value="Personal">Personal Loan</option>
-                                        <option value="Business">Business Loan</option>
-                                        <option value="Home">Home Loan</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Monthly Income (₹)</label>
-                                <input type="number" id="loan-income" required>
-                            </div>
-
-                            <h4 style="margin: 1.5rem 0 0.6rem 0;">Documents Required</h4>
-                            
-                            <div class="grid-2">
-                                <div class="form-group">
-                                    <label>Aadhaar Card Upload</label>
-                                    <input type="file" id="doc-aadhaar" accept="image/*,application/pdf" required onchange="previewFile('doc-aadhaar', 'aadhaar-preview')">
-                                    <div class="file-preview" id="aadhaar-preview"></div>
-                                </div>
-                                <div class="form-group">
-                                    <label>PAN Card Upload</label>
-                                    <input type="file" id="doc-pan" accept="image/*,application/pdf" required onchange="previewFile('doc-pan', 'pan-preview')">
-                                    <div class="file-preview" id="pan-preview"></div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Income Proof (Salary slip / Bank statement)</label>
-                                <input type="file" id="doc-income" accept="image/*,application/pdf" required onchange="previewFile('doc-income', 'income-preview')">
-                                <div class="file-preview" id="income-preview"></div>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Submit Application</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="admin-dashboard-section" class="section">
-            <h2>Admin Dashboard - Applications & Validations</h2>
-            <div class="dashboard-grid" style="grid-template-columns: 240px 1fr;">
-                <div class="dash-sidebar">
-                    <ul>
-                        <li class="active" onclick="switchAdminTab('admin-home')">Manage Loans</li>
-                        <li onclick="switchAdminTab('admin-users')">All Customers</li>
-                        <li onclick="handleLogout()">Logout</li>
-                    </ul>
-                </div>
-                <div class="dash-content">
-                    <div id="admin-home">
-                        <h3>Recent Loan Applications</h3>
-                        <div class="table-responsive">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>User</th>
-                                        <th>Type</th>
-                                        <th>Amount</th>
-                                        <th>Income</th>
-                                        <th>Docs</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="admin-loan-table">
-                                    </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div id="admin-users" style="display: none;">
-                        <h3>Registered Users</h3>
-                        <div class="table-responsive">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Mobile</th>
-                                        <th>Registered Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="admin-users-table">
-                                    </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="calculator-section" class="section">
-            <h2>EMI Calculator</h2>
-            <p style="color: var(--gray); margin-bottom: 1.5rem;">Calculate the exact monthly payment you will pay for your loans.</p>
-            <div class="calculator-container">
-                <div>
-                    <div class="form-group">
-                        <label>Loan Amount (₹)</label>
-                        <input type="number" id="calc-amount" value="100000" min="10000" max="1000000" step="5000" oninput="calculateEmi()">
-                    </div>
-                    <div class="form-group">
-                        <label>Interest Rate (%) P.A.</label>
-                        <input type="number" id="calc-rate" value="10.5" step="0.5" min="1" max="30" oninput="calculateEmi()">
-                    </div>
-                    <div class="form-group">
-                        <label>Tenure (Years)</label>
-                        <input type="number" id="calc-tenure" value="5" min="1" max="30" oninput="calculateEmi()">
-                    </div>
-                </div>
-                <div class="calculator-result">
-                    <p style="font-weight: 500; font-size: 1.1rem;">Monthly Payment (EMI)</p>
-                    <div class="calc-value">₹ <span id="calc-emi-result">0</span></div>
-                    <div style="font-size: 0.85rem; color: var(--gray); margin-top: 0.5rem;">
-                        Total Payable: ₹ <span id="calc-total-payable">0</span> | Total Interest: ₹ <span id="calc-total-interest">0</span>
-                    </div>
-                    <button class="btn btn-primary" style="margin-top: 1.5rem;" onclick="navigateTo('register-section')">Apply For This Loan</button>
-                </div>
-            </div>
-        </section>
-
-        <section id="about-section" class="section">
-            <h2>About Us</h2>
-            <p style="color: var(--gray); margin-bottom: 2rem; font-size: 1.05rem;">
-                QuickLoan India is a modern financial technology platform that uses secure technology to connect customers with trusted banking partners.
-            </p>
-            <div class="grid-cards">
-                <div class="card">
-                    <h3>Fast Approvals</h3>
-                    <p>Advanced digital processing and minimum documentation checks.</p>
-                </div>
-                <div class="card">
-                    <h3>Absolute Security</h3>
-                    <p>Protected by end-to-end data encryption and strict adherence to security principles.</p>
-                </div>
-                <div class="card">
-                    <h3>Transparent Data</h3>
-                    <p>Zero hidden costs and absolute clarity on interest modules.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="faq-section" class="section">
-            <h2>Frequently Asked Questions</h2>
-            <p style="color: var(--gray); margin-bottom: 1.5rem;">Find quick answers to common questions about QuickLoan India.</p>
-            
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <h4>What documents are required for an instant loan? <span>+</span></h4>
-                <p>You require an identity proof (Aadhaar or PAN), address proof, and income proof like a recent payslip or 3-month bank statement.</p>
-            </div>
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <h4>How soon is the amount disbursed? <span>+</span></h4>
-                <p>After your documents are validated and approved, the funds are deposited directly into your bank account within 24 hours.</p>
-            </div>
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <h4>What are the allowable loan ranges? <span>+</span></h4>
-                <p>You can apply for amounts ranging from a minimum of ₹10,000 to a maximum of ₹5,00,000.</p>
-            </div>
-        </section>
-
-        <section id="contact-section" class="section">
-            <div class="form-container" style="max-width: 600px;">
-                <h2>Contact Support</h2>
-                <form onsubmit="handleContact(event)">
-                    <div class="form-group">
-                        <label>Your Name</label>
-                        <input type="text" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Email Address</label>
-                        <input type="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Subject</label>
-                        <input type="text" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Message</label>
-                        <textarea rows="4" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
-                </form>
-            </div>
-        </section>
-
-    </main>
-
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h4>QuickLoan India</h4>
-                <p style="font-size: 0.85rem; color: #d1d8e0;">Empowering individuals and businesses with secure, accessible, and fast financial services.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Useful Links</h4>
-                <ul>
-                    <li><a onclick="navigateTo('home-section')">Home</a></li>
-                    <li><a onclick="navigateTo('calculator-section')">EMI Calculator</a></li>
-                    <li><a onclick="navigateTo('about-section')">About</a></li>
-                    <li><a onclick="navigateTo('contact-section')">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Contact Details</h4>
-                <ul style="font-size: 0.85rem;">
-                    <li>Email: support@quickloanindia.com</li>
-                    <li>Phone: +91 1800-123-4567</li>
-                    <li>Location: Bandra-Kurla Complex, Mumbai</li>
-                </ul>
+<div class="container">
+    <div id="home" class="page">
+        <div class="card">
+            <h1>Get Instant Loans up to ₹5 Lakhs</h1>
+            <p>100% Digital. Zero Paperwork. 24-hour Disbursal.</p>
+            <div class="card" style="background:#eef;">
+                <h3>CIBIL Score Eligibility Check</h3>
+                <input type="text" id="pan-input" placeholder="Enter 10-digit PAN" maxlength="10">
+                <button class="btn btn-primary" onclick="checkCibil()">Check Eligibility</button>
+                <div id="cibil-result" style="margin-top:1rem;"></div>
             </div>
         </div>
-        <div class="footer-bottom">
-            &copy; 2026 QuickLoan India. All rights reserved.
+    </div>
+
+    <div id="dashboard" class="page" style="display:none;">
+        <div class="card">
+            <h2>My Loan Application</h2>
+            <div id="loan-status-area">No active application found.</div>
+            <div id="payment-area" style="display:none; margin-top:1rem;">
+                <p><strong>Processing Fee (2%):</strong> ₹2,000</p>
+                <button class="btn btn-primary" onclick="payFee()">Pay Now (Simulated)</button>
+            </div>
         </div>
-    </footer>
+    </div>
 
-    <script>
-        // --- DATA INITIALIZATION ---
-        if (!localStorage.getItem('users')) {
-            localStorage.setItem('users', JSON.stringify([
-                { name: "Demo User", email: "user@quickloan.com", mobile: "9876543210", password: "password", role: "user" },
-                { name: "Test Admin", email: "admin@quickloan.com", mobile: "9000000000", password: "admin", role: "admin" }
-            ]));
+    <div id="admin" class="page" style="display:none;">
+        <div class="card">
+            <h2>Admin Control Panel</h2>
+            <table border="1" style="width:100%; border-collapse: collapse; margin-top:1rem;">
+                <thead><tr><th>Applicant</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead>
+                <tbody id="admin-table"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="disclaimer">
+    IMPORTANT: This is a DEMO project for educational purposes. No real financial transactions, real money, or actual banking integrations are involved. Not a registered financial institution.
+</div>
+
+<script>
+    let appState = {
+        loanStatus: 'None', // None, Pending, Approved, Disbursed
+        cibil: 0
+    };
+
+    function showSection(id) {
+        document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+        document.getElementById(id).style.display = 'block';
+    }
+
+    function checkCibil() {
+        const score = Math.floor(Math.random() * (800 - 600 + 1) + 600);
+        document.getElementById('cibil-result').innerHTML = `<strong>Your CIBIL: ${score}</strong>. Eligibility: ${score > 700 ? 'Approved' : 'Rejected'}`;
+        if(score > 700) {
+            document.getElementById('cibil-result').innerHTML += `<br><button class="btn btn-primary" onclick="applyLoan()">Apply Now</button>`;
         }
-        if (!localStorage.getItem('loans')) {
-            localStorage.setItem('loans', JSON.stringify([
-                {
-                    id: "LOAN-1001",
-                    userId: "user@quickloan.com",
-                    name: "Demo User",
-                    mobile: "9876543210",
-                    address: "Flat 4B, Mumbai",
-                    amount: 200000,
-                    type: "Personal",
-                    income: 50000,
-                    status: "Approved",
-                    date: "2026-05-01",
-                    documents: { aadhaar: "data:image/png;base64,iVBOR...dummy", pan: "data:image/png;base64,...", incomeProof: "data:..." }
-                }
-            ]));
+    }
+
+    function applyLoan() {
+        appState.loanStatus = 'Pending';
+        alert("Application Submitted!");
+        renderDashboard();
+    }
+
+    function renderDashboard() {
+        const area = document.getElementById('loan-status-area');
+        if(appState.loanStatus === 'Pending') {
+            area.innerHTML = `<div class="badge" style="background:var(--warning)">Status: Pending Verification</div>`;
+        } else if(appState.loanStatus === 'Approved') {
+            area.innerHTML = `<div class="badge" style="background:var(--primary); color:white;">Status: Approved</div>`;
+            document.getElementById('payment-area').style.display = 'block';
+        } else if(appState.loanStatus === 'Disbursed') {
+            area.innerHTML = `<div class="badge" style="background:var(--success); color:white;">Status: Disbursed! Transaction ID: TXN${Math.floor(Math.random()*999999)}</div>`;
         }
+        renderAdmin();
+    }
 
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    function payFee() {
+        alert("Payment Successful! Processing disbursal...");
+        appState.loanStatus = 'Disbursed';
+        renderDashboard();
+    }
 
-        document.addEventListener("DOMContentLoaded", function() {
-            calculateEmi();
-            checkRoleNavigation();
-        });
+    function renderAdmin() {
+        const tbody = document.getElementById('admin-table');
+        tbody.innerHTML = `<tr><td>User Demo</td><td>₹5,00,000</td><td>${appState.loanStatus}</td>
+            <td>
+                <button onclick="updateStatus('Approved')">Approve</button>
+            </td></tr>`;
+    }
 
-        // --- NAVIGATION & VIEWS ---
-        function navigateTo(sectionId) {
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(s => s.classList.remove('active'));
-            
-            document.getElementById(sectionId).classList.add('active');
-            window.scrollTo(0, 0);
-        }
-
-        function checkRoleNavigation() {
-            const authButtons = document.getElementById('auth-nav-buttons');
-            if (currentUser) {
-                if (currentUser.role === 'admin') {
-                    authButtons.innerHTML = `<button class="btn btn-outline" onclick="navigateTo('admin-dashboard-section')">Admin Panel</button> <button class="btn btn-primary" onclick="handleLogout()">Logout</button>`;
-                    loadAdminData();
-                    navigateTo('admin-dashboard-section');
-                } else {
-                    authButtons.innerHTML = `<button class="btn btn-outline" onclick="navigateTo('dashboard-section')">Dashboard</button> <button class="btn btn-primary" onclick="handleLogout()">Logout</button>`;
-                    loadUserData();
-                    navigateTo('dashboard-section');
-                }
-            } else {
-                authButtons.innerHTML = `<button class="btn btn-outline" onclick="navigateTo('login-section')">Login</button> <button class="btn btn-primary" onclick="navigateTo('register-section')">Apply Now</button>`;
-            }
-        }
-
-        // --- AUTHENTICATION ---
-        function handleRegister(e) {
-            e.preventDefault();
-            const name = document.getElementById('reg-name').value;
-            const email = document.getElementById('reg-email').value;
-            const mobile = document.getElementById('reg-mobile').value;
-            const password = document.getElementById('reg-password').value;
-
-            let users = JSON.parse(localStorage.getItem('users'));
-            if (users.find(u => u.email === email)) {
-                alert("Email already registered!");
-                return;
-            }
-            users.push({ name, email, mobile, password, role: "user" });
-            localStorage.setItem('users', JSON.stringify(users));
-            alert("Registration successful! You can now log in.");
-            document.getElementById('register-form').reset();
-            navigateTo('login-section');
-        }
-
-        function handleLogin(e) {
-            e.preventDefault();
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
-            const isAdmin = document.getElementById('is-admin-login').checked;
-
-            let users = JSON.parse(localStorage.getItem('users'));
-            const userObj = users.find(u => u.email === email && u.password === password);
-
-            if (!userObj) {
-                alert("Invalid email or password!");
-                return;
-            }
-
-            if (isAdmin && userObj.role !== 'admin') {
-                alert("This user is not an administrator!");
-                return;
-            }
-
-            currentUser = userObj;
-            localStorage.setItem('currentUser', JSON.stringify(currentUser));
-            checkRoleNavigation();
-        }
-
-        function handleLogout() {
-            localStorage.removeItem('currentUser');
-            currentUser = null;
-            checkRoleNavigation();
-            navigateTo('home-section');
-        }
-
-        // --- USER ACTIONS & DASHBOARD ---
-        function loadUserData() {
-            if (!currentUser) return;
-            document.getElementById('dash-user-name').innerText = currentUser.name;
-            document.getElementById('loan-name').value = currentUser.name;
-            document.getElementById('loan-mobile').value = currentUser.mobile;
-
-            // Fetch Loan Applications
-            const loans = JSON.parse(localStorage.getItem('loans')) || [];
-            const userLoans = loans.filter(l => l.userId === currentUser.email);
-
-            let statusEl = document.getElementById('dash-loan-status');
-            let amountEl = document.getElementById('dash-loan-amount');
-            let emiEl = document.getElementById('dash-emi-count');
-
-            if (userLoans.length > 0) {
-                const latest = userLoans[userLoans.length - 1];
-                statusEl.innerHTML = `<span class="badge badge-${latest.status === 'Approved' ? 'success' : latest.status === 'Rejected' ? 'danger' : 'warning'}">${latest.status}</span>`;
-                amountEl.innerText = `₹ ${latest.amount.toLocaleString()}`;
-                emiEl.innerText = Math.round(latest.amount / 60).toLocaleString(); // Estimated
-                
-                let tbody = document.getElementById('dash-application-history');
-                tbody.innerHTML = userLoans.map(l => `
-                    <tr>
-                        <td>${l.id}</td>
-                        <td>${l.type}</td>
-                        <td>₹ ${l.amount.toLocaleString()}</td>
-                        <td><span class="badge badge-${l.status === 'Approved' ? 'success' : l.status === 'Rejected' ? 'danger' : 'warning'}">${l.status}</span></td>
-                        <td>${l.date}</td>
-                    </tr>
-                `).join('');
-            } else {
-                statusEl.innerText = "No application";
-                amountEl.innerText = "₹ 0";
-                emiEl.innerText = "0";
-            }
-        }
-
-        function switchDashboardTab(tabId) {
-            document.querySelectorAll('.dash-tab-content').forEach(el => el.style.display = 'none');
-            document.getElementById(tabId).style.display = 'block';
-            
-            const tabs = document.querySelectorAll('.dash-sidebar li');
-            tabs.forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
-        }
-
-        // --- FILE HANDLING & PREVIEW ---
-        let base64Documents = {};
-        function previewFile(inputId, previewId) {
-            const file = document.getElementById(inputId).files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    base64Documents[inputId] = e.target.result;
-                    document.getElementById(previewId).innerHTML = `<span>📎 ${file.name} (File ready to upload)</span>`;
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function handleLoanApplication(e) {
-            e.preventDefault();
-            if (!currentUser) return alert("Please log in to apply");
-
-            const loans = JSON.parse(localStorage.getItem('loans')) || [];
-            const newLoan = {
-                id: "LOAN-" + Math.floor(1000 + Math.random() * 9000),
-                userId: currentUser.email,
-                name: document.getElementById('loan-name').value,
-                mobile: document.getElementById('loan-mobile').value,
-                address: document.getElementById('loan-address').value,
-                amount: parseInt(document.getElementById('loan-amount').value),
-                type: document.getElementById('loan-type').value,
-                income: parseInt(document.getElementById('loan-income').value),
-                status: "Pending",
-                date: new Date().toISOString().split('T')[0],
-                documents: {
-                    aadhaar: base64Documents['doc-aadhaar'] || "Omitted",
-                    pan: base64Documents['doc-pan'] || "Omitted",
-                    incomeProof: base64Documents['doc-income'] || "Omitted"
-                }
-            };
-
-            loans.push(newLoan);
-            localStorage.setItem('loans', JSON.stringify(loans));
-            alert("Loan application submitted successfully!");
-            document.getElementById('loan-form').reset();
-            loadUserData();
-            switchDashboardTab('dash-home');
-        }
-
-        // --- ADMIN DASHBOARD ---
-        function loadAdminData() {
-            const loans = JSON.parse(localStorage.getItem('loans')) || [];
-            const users = JSON.parse(localStorage.getItem('users')) || [];
-
-            let tbody = document.getElementById('admin-loan-table');
-            if (loans.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7">No applications available.</td></tr>`;
-            } else {
-                tbody.innerHTML = loans.map(l => `
-                    <tr>
-                        <td><b>${l.name}</b><br><small>${l.userId}</small></td>
-                        <td>${l.type}</td>
-                        <td>₹ ${l.amount.toLocaleString()}</td>
-                        <td>₹ ${l.income.toLocaleString()}</td>
-                        <td>
-                            <a href="${l.documents.aadhaar}" target="_blank" style="color:var(--primary); text-decoration:none; display:block; font-size:0.85rem">📄 View Docs</a>
-                        </td>
-                        <td><span class="badge badge-${l.status === 'Approved' ? 'success' : l.status === 'Rejected' ? 'danger' : 'warning'}">${l.status}</span></td>
-                        <td>
-                            <button class="btn btn-primary" style="padding:0.25rem 0.5rem; font-size:0.75rem" onclick="updateLoanStatus('${l.id}', 'Approved')">Approve</button>
-                            <button class="btn btn-outline" style="padding:0.25rem 0.5rem; font-size:0.75rem; border-color:var(--danger); color:var(--danger);" onclick="updateLoanStatus('${l.id}', 'Rejected')">Reject</button>
-                        </td>
-                    </tr>
-                `).join('');
-            }
-
-            let userTbody = document.getElementById('admin-users-table');
-            userTbody.innerHTML = users.map(u => `
-                <tr>
-                    <td>${u.name}</td>
-                    <td>${u.email}</td>
-                    <td>${u.mobile}</td>
-                    <td>2026-05-01</td>
-                </tr>
-            `).join('');
-        }
-
-        function updateLoanStatus(id, status) {
-            let loans = JSON.parse(localStorage.getItem('loans')) || [];
-            loans = loans.map(l => {
-                if (l.id === id) l.status = status;
-                return l;
-            });
-            localStorage.setItem('loans', JSON.stringify(loans));
-            loadAdminData();
-            alert(`Application updated as ${status}`);
-        }
-
-        function switchAdminTab(tabId) {
-            document.getElementById('admin-home').style.display = (tabId === 'admin-home') ? 'block' : 'none';
-            document.getElementById('admin-users').style.display = (tabId === 'admin-users') ? 'block' : 'none';
-            const tabs = document.querySelectorAll('#admin-dashboard-section .dash-sidebar li');
-            tabs.forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
-        }
-
-        // --- EMI CALCULATOR ---
-        function calculateEmi() {
-            const p = parseFloat(document.getElementById('calc-amount').value);
-            const rAnnual = parseFloat(document.getElementById('calc-rate').value);
-            const r = rAnnual / 12 / 100;
-            const n = parseFloat(document.getElementById('calc-tenure').value) * 12;
-
-            if (p && r && n) {
-                // Formula: E = [P x r x (1+r)^n]/[(1+r)^n-1]
-                const emi = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-                const totalPayable = emi * n;
-                const totalInterest = totalPayable - p;
-
-                document.getElementById('calc-emi-result').innerText = Math.round(emi).toLocaleString();
-                document.getElementById('calc-total-payable').innerText = Math.round(totalPayable).toLocaleString();
-                document.getElementById('calc-total-interest').innerText = Math.round(totalInterest).toLocaleString();
-            }
-        }
-
-        // --- EXTRA INTERACTION & UTILITIES ---
-        function toggleFaq(element) {
-            element.classList.toggle('active');
-        }
-        
-        function handleContact(e) {
-            e.preventDefault();
-            alert("Thank you for contacting us. We will get back to you within 24 hours!");
-            e.target.reset();
-        }
-    </script>
+    function updateStatus(status) {
+        appState.loanStatus = status;
+        renderDashboard();
+    }
+</script>
 </body>
 </html>
