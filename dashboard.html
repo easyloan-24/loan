@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head><title>Dashboard</title></head>
+<body>
+
+<h1>User Dashboard</h1>
+
+<button onclick="logout()">Logout</button>
+
+<h2>Apply Loan</h2>
+<input id="amount" placeholder="Loan Amount">
+<select id="type">
+  <option>Personal</option>
+  <option>Business</option>
+</select>
+
+<h3>Upload Aadhaar</h3>
+<input type="file" id="aadhaar">
+
+<h3>Upload PAN</h3>
+<input type="file" id="pan">
+
+<button onclick="applyLoan()">Submit</button>
+
+<script>
+function logout(){
+  localStorage.removeItem("currentUser");
+  window.location="index.html";
+}
+
+function toBase64(file){
+  return new Promise((res)=>{
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = ()=>res(reader.result);
+  });
+}
+
+async function applyLoan(){
+  let user = localStorage.getItem("currentUser");
+
+  let aadhaar = await toBase64(document.getElementById("aadhaar").files[0]);
+  let pan = await toBase64(document.getElementById("pan").files[0]);
+
+  let loan = {
+    user,
+    amount: amount.value,
+    type: type.value,
+    aadhaar,
+    pan,
+    status: "Pending"
+  };
+
+  let loans = JSON.parse(localStorage.getItem("loans")) || [];
+  loans.push(loan);
+  localStorage.setItem("loans", JSON.stringify(loans));
+
+  alert("Loan Applied!");
+}
+</script>
+
+</body>
+</html>
